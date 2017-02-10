@@ -1,4 +1,13 @@
 matrix_correlation_qualitative<-function(data){
+
+      # Cramer v function (from R Bloggers)
+      cv.test = function(x,y) {
+  CV = sqrt(chisq.test(x, y, correct=FALSE)$statistic /
+              (length(x) * (min(length(unique(x)),length(unique(y))) - 1)))
+  print.noquote("Cramér V / Phi:")
+  return(as.numeric(CV))
+}
+
       # Creation of the empty correlation matrix
   matrix_correlation<-data.frame(matrix(0,ncol=ncol(data),nrow=ncol(data)))
   row.names(matrix_correlation)<-names(data)
