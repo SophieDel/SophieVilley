@@ -1,0 +1,15 @@
+matrix_correlation_qualitative<-function(data){
+      # Creation of the empty correlation matrix
+  matrix_correlation<-data.frame(matrix(0,ncol=ncol(data),nrow=ncol(data)))
+  row.names(matrix_correlation)<-names(data)
+  colnames(matrix_correlation)<-names(data)
+  
+      # Fill the correlation matrix with Cramer V
+  for (i in 1:ncol(matrix_correlation)){
+    for (j in 1 :ncol(matrix_correlation)){
+      matrix_correlation[i,j]<-cv.test(data[,i],data[,j])
+    }
+  }   
+  matrix_correlation<-as.matrix(matrix_correlation)
+  return(matrix_correlation)
+}
